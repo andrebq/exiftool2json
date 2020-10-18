@@ -1,3 +1,3 @@
-module github.com/andrebq/programmfabrik
+module github.com/andrebq/exiftool2json
 
 go 1.13
