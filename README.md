@@ -37,14 +37,14 @@ buffered channels. The size of the channel would indicate the max number of
 instances that should be executed at any given moment.
 
 - It might be possible to improve the parsing code so that
-`xml.Decoder#DecodeElement` could be used instead. But care must be taken to
+`xml.Decoder#DecodeElement` could be used. But care must be taken to
 avoid using `xml.Decoder#Token` at the root level. Otherwise, the whole XML
-will be processed (as that method provides guarantees regarding who tags
+will be processed (as that method provides guarantees regarding which tags
 are closed)
 
-- `exif.Tool#WalkTags` doesn't use channels by design, otherwise callers
-would need to deal with the added concurrency. By relying on a blocking API,
-callers have the choice to use it in a sync or async manner.
+- `exif.Tool#WalkTags` doesn't use channels. This is a design decision, otherwise
+callers would need to deal with the added concurrency. By relying on a
+blocking API, callers have the choice to use it either sync or async.
 
 - Allocation could be reduced in the JSON encoding block by implementing
 MarshalJSON for some types, but this might make the code less readable.
