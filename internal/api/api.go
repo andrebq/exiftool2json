@@ -112,7 +112,7 @@ func (tw *tagWriter) write(t exif.Tag) {
 		return
 	}
 	tw.err = tw.enc.Encode(TagInfo{
-		Writable:    t.Wriatable,
+		Writable:    t.Writable,
 		Path:        fmt.Sprintf("%v:%v", t.Table.Name, t.Name),
 		Group:       t.Table.Name,
 		Type:        t.Type,

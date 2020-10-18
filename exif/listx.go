@@ -18,7 +18,7 @@ type (
 	// Tag contains details about an ExIF Tag
 	Tag struct {
 		Table       TableInfo     `xml:"-"`
-		Wriatable   bool          `xml:"writable,attr"`
+		Writable    bool          `xml:"writable,attr"`
 		Type        string        `xml:"type,attr"`
 		Name        string        `xml:"name,attr"`
 		Description []Description `xml:"desc"`
@@ -130,7 +130,7 @@ func processTable(dec *xml.Decoder, tableStart xml.StartElement, handle TagFunc)
 
 	for _, a := range tableStart.Attr {
 		if a.Name.Local == "name" {
-			table.Name = a.Name.Local
+			table.Name = a.Value
 			break
 		}
 	}
@@ -166,8 +166,8 @@ func processTag(dec *xml.Decoder, table TableInfo, tagStart xml.StartElement, ha
 			tag.Name = a.Value
 		case "type":
 			tag.Type = a.Value
-		case "writetable":
-			tag.Wriatable = a.Value == "true"
+		case "writable":
+			tag.Writable = a.Value != "false"
 		}
 	}
 	for {
